@@ -55,8 +55,9 @@ jobs:
       - name: Build
         run: pnpm run build
 
-      - name: Publish to npm
-        run: npm publish --provenance --access public
+      - name: Publish with np
+        if: github.event_name == 'push'
+        run: pnpm exec np --no-interactive --yolo patch
         env:
           # it is currently imperative to set NODE_AUTH_TOKEN to an empty string for OIDC auth to work
           # https://github.com/actions/setup-node/blob/633bb92bc0aabcae06e8ea93b85aecddd374c402/src/authutil.ts#L57
