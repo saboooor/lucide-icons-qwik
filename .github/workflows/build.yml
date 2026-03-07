@@ -2,13 +2,21 @@ name: Build and Release on Icon Library Update
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main
     paths:
       - 'package.json'  # Trigger when dependency is updated
   pull_request:
-    branches: [main]
+    branches:
+      - main
     paths:
       - 'package.json'
+
+permissions:
+  id-token: write  # Required for OIDC
+  contents: write
+  pull-requests: write
+  packages: write
 
 jobs:
   build-and-release:
@@ -24,8 +32,9 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 21
-          cache: pnpm
+          node-version: 24
+          cache: 'pnpm'
+          registry-url: 'https://registry.npmjs.org'
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
@@ -46,11 +55,10 @@ jobs:
       - name: Build
         run: pnpm run build
 
-      - name: Set publishing config
-        run: pnpm config set '//registry.npmjs.org/:_authToken' "${NODE_AUTH_TOKEN}"
+      - name: Publish to npm
+        working-directory: packages/rgbirdflop
+        run: npm publish --provenance --access public
         env:
-          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
-
-      - name: Publish with np
-        if: github.event_name == 'push'
-        run: pnpm exec np --no-interactive --yolo patch
+          # it is currently imperative to set NODE_AUTH_TOKEN to an empty string for OIDC auth to work
+          # https://github.com/actions/setup-node/blob/633bb92bc0aabcae06e8ea93b85aecddd374c402/src/authutil.ts#L57
+          NODE_AUTH_TOKEN: ""
