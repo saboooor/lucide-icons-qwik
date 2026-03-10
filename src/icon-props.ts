@@ -1,6 +1,6 @@
-import { QwikDOMAttributes } from '@builder.io/qwik';
+import { SVGProps } from '@qwik.dev/core';
 
-export interface IconProps extends QwikDOMAttributes {
+export interface IconProps extends SVGProps<SVGSVGElement> {
   size?: number,
   color?: string,
   strokeWidth?: number,
