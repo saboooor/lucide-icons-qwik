@@ -15,7 +15,9 @@
     "skipLibCheck": true,
     "incremental": true,
     "isolatedModules": true,
-    "types": ["vite/client"]
+    "types": ["vite/client"],
+    "rootDir": "src"
   },
-  "include": ["src", "build.ts"],
+  "include": ["src"],
+  "exclude": ["build.ts"]
 }
