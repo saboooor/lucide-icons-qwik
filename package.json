@@ -38,7 +38,7 @@
   "type": "module",
   "scripts": {
     "build": "pnpm build.icons && qwik build",
-    "build.icons": "bun build.ts",
+    "build.icons": "bun src/build.ts",
     "build.lib": "vite build --mode lib",
     "build.types": "tsc -p tsconfig.types.json --emitDeclarationOnly --incremental false",
     "dev": "vite --mode ssr",
