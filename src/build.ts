@@ -20,7 +20,7 @@ function buildContent(icon: IconNode) {
     return `<${tag} ${attrs}/>`;
   });
 
-  return `<>${elements.join('')}</>`;
+  return `${elements.join('')}`;
 };
 
 function buildIcon(typesRelPath: string, baseIconRelPath: string) {
