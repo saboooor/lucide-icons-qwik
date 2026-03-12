@@ -1,6 +1,6 @@
 {
   "name": "lucide-icons-qwik",
-  "version": "0.577.2-3",
+  "version": "0.577.2-4",
   "description": "Lucide icon library package for Qwik applications",
   "author": {
     "name": "saboooor",
@@ -19,17 +19,16 @@
   ],
   "main": "./lib/index.qwik.mjs",
   "qwik": "./lib/index.qwik.mjs",
-  "types": "./lib-types/index.d.ts",
+  "types": "./lib/index.d.ts",
   "exports": {
     ".": {
       "import": "./lib/index.qwik.mjs",
       "require": "./lib/index.qwik.cjs",
-      "types": "./lib-types/index.d.ts"
+      "types": "./lib/index.d.ts"
     }
   },
   "files": [
-    "lib",
-    "lib-types"
+    "lib"
   ],
   "engines": {
     "node": ">=16.8.0 <18.0.0 || >=18.11"
