@@ -1,8 +1,15 @@
-// @ts-nocheck
 import { mkdir, writeFile } from 'fs/promises';
 import { createWriteStream, readFileSync } from 'fs';
 
 import { IconNode, icons as lucideIcons } from 'lucide';
+
+
+// read lucide.d.ts to find deprecated icons
+const types = readFileSync('./node_modules/lucide/dist/lucide.d.ts', 'utf8');
+const deprecatedIcons = new Set<string>();
+const regex = /@deprecated[\s\S]*?declare const (\w+)/g;
+let match;
+while ((match = regex.exec(types))) deprecatedIcons.add(match[1]);
 
 const globalProps = [
   'Infinity',
@@ -39,7 +46,15 @@ function buildIcon() {
     .replace('{{BASE_ICON_REL_PATH}}', baseIconPath);
 
   return function(name: string, content: string) {
-    return template
+    // add deprecation comment if the icon is deprecated in lucide
+    const deprecated = deprecatedIcons.has(name)
+      ? `/**
+ * @deprecated Brand icons are deprecated in Lucide.
+ * Use https://simpleicons.org instead.
+ */\n`
+      : '';
+
+    return deprecated + template
       .replace(/{{ICON_NAME}}/g, name)
       .replace('{{CONTENT}}', content);
   };
