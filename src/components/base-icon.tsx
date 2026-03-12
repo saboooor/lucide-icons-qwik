@@ -1,15 +1,26 @@
 import { component$, Slot } from '@qwik.dev/core';
 
-import { BaseIconProps } from '../icon-props';
-import fallbackProps from '../default-props';
+import { SVGProps } from '@qwik.dev/core';
 
-export default component$(({
+export interface IconProps extends SVGProps<SVGSVGElement> {
+  size?: number,
+  color?: string,
+  strokeWidth?: number,
+  strokeLinecap?: 'round' | 'butt' | 'square' | 'inherit' | undefined,
+  strokeLinejoin?: 'round' | 'inherit' | 'miter' | 'bevel' | undefined
+}
+
+export interface BaseIconProps extends IconProps {
+ name: string
+}
+
+export const BaseIcon = component$(({
   name,
-  size = fallbackProps.size,
-  color = fallbackProps.color,
-  strokeWidth = fallbackProps.strokeWidth,
-  strokeLinecap = fallbackProps.strokeLinecap,
-  strokeLinejoin = fallbackProps.strokeLinejoin,
+  size = 24,
+  color = 'currentColor',
+  strokeWidth = 2,
+  strokeLinecap = 'round',
+  strokeLinejoin = 'round',
   ...restProps
 }: BaseIconProps) => {
   return <svg
