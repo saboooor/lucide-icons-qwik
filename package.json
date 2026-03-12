@@ -1,14 +1,14 @@
 {
   "name": "lucide-icons-qwik",
-  "version": "0.577.0-rc.0",
+  "version": "0.577.2-1",
   "description": "Lucide icon library package for Qwik applications",
   "author": {
-    "name": "Luminescent",
-    "url": "https://luminescent.dev"
+    "name": "saboooor",
+    "url": "https://saboor.ca"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/LuminescentDev/lucide-icons-qwik.git"
+    "url": "https://github.com/saboooor/lucide-icons-qwik.git"
   },
   "license": "LICENSE",
   "keywords": [
@@ -32,12 +32,8 @@
     "lib-types"
   ],
   "engines": {
-    "node": ">=16.8.0 <18.0.0 || >=18.11",
-    "npm": "please-use-pnpm",
-    "yarn": "please-use-pnpm",
-    "pnpm": ">=8.6.12"
+    "node": ">=16.8.0 <18.0.0 || >=18.11"
   },
-  "packageManager": "pnpm@10.30.3",
   "private": false,
   "type": "module",
   "scripts": {
