@@ -1,5 +1,5 @@
 import { component$ } from '@qwik.dev/core';
-import { ChefHat } from '../../lib/index.qwik.mjs';
+import { ChefHat } from '../';
 
 export default component$(() => {
   return (
