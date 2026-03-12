@@ -1,6 +1,6 @@
 import { BaseIcon, IconProps } from '{{BASE_ICON_REL_PATH}}';
 import { component$ } from '@qwik.dev/core';
-
+{{DOCS}}
 export const {{ICON_NAME}} = component$((props: IconProps) => {
   return <BaseIcon name="{{ICON_NAME}}" {...props}>
     {{CONTENT}}

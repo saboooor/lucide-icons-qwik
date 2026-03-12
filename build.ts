@@ -3,7 +3,6 @@ import { createWriteStream, readFileSync } from 'fs';
 
 import { IconNode, icons as lucideIcons } from 'lucide';
 
-
 // read lucide.d.ts to find deprecated icons
 const types = readFileSync('./node_modules/lucide/dist/lucide.d.ts', 'utf8');
 const deprecatedIcons = new Set<string>();
@@ -51,10 +50,11 @@ function buildIcon() {
       ? `/**
  * @deprecated Brand icons are deprecated in Lucide.
  * Use https://simpleicons.org instead.
- */\n`
+ */`
       : '';
-
-    return deprecated + template
+    
+    return template
+      .replace('{{DOCS}}', deprecated)
       .replace(/{{ICON_NAME}}/g, name)
       .replace('{{CONTENT}}', content);
   };
