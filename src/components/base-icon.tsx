@@ -1,9 +1,9 @@
-import { Slot } from '@qwik.dev/core';
+import { component$, Slot } from '@qwik.dev/core';
 
 import { BaseIconProps } from '../icon-props';
 import fallbackProps from '../default-props';
 
-export default ({
+export default component$(({
   name,
   size = fallbackProps.size,
   color = fallbackProps.color,
@@ -22,4 +22,4 @@ export default ({
   >
     <Slot/>
   </svg>;
-};
+});
