@@ -30,8 +30,8 @@ importers:
         specifier: ^17.4.0
         version: 17.4.0
       lucide:
-        specifier: ^0.577.0
-        version: 0.577.0
+        specifier: ^1.0.0
+        version: 1.7.0
       np:
         specifier: ^11.0.2
         version: 11.0.2(@types/node@25.3.5)(typescript@5.9.3)
@@ -2001,8 +2001,8 @@ packages:
     resolution: {integrity: sha512-ESL2CrkS/2wTPfuend7Zhkzo2u0daGJ/A2VucJOgQ/C48S/zB8MMeMHSGKYpXhIjbPxfuezITkaBH1wqv00DDQ==}
     engines: {node: 20 || >=22}
 
-  lucide@0.577.0:
-    resolution: {integrity: sha512-PpC/m5eOItp/WU/GlQPFBXDOhq6HibL73KzYP37OX3LM7VmzWQF8voEj8QRWUFvy9FIKfeDQkWYoyS1D/MdWFA==}
+  lucide@1.7.0:
+    resolution: {integrity: sha512-aYNogbuIxea3a8offpKjdMGf2FsUk9GECFh0B4iJgXlJOX41+7/ncvLVluKki8477SoybEdyGGf+qGYLBDiEsA==}
 
   macos-version@6.0.0:
     resolution: {integrity: sha512-O2S8voA+pMfCHhBn/TIYDXzJ1qNHpPDU32oFxglKnVdJABiYYITt45oLkV9yhwA3E2FDwn3tQqUFrTsr1p3sBQ==}
@@ -4621,7 +4621,7 @@ snapshots:
 
   lru-cache@11.2.6: {}
 
-  lucide@0.577.0: {}
+  lucide@1.7.0: {}
 
   macos-version@6.0.0:
     dependencies:
