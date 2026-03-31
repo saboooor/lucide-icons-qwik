@@ -1,6 +1,6 @@
 {
   "name": "lucide-icons-qwik",
-  "version": "0.577.0-0",
+  "version": "1.7.0-qwik-v1",
   "description": "Lucide icon library package for Qwik applications",
   "author": {
     "name": "Luminescent",
@@ -37,7 +37,7 @@
     "yarn": "please-use-pnpm",
     "pnpm": ">=8.6.12"
   },
-  "packageManager": "pnpm@10.30.3",
+  "packageManager": "pnpm@10.33.0",
   "private": false,
   "type": "module",
   "scripts": {
@@ -53,18 +53,18 @@
     "test": "echo no tests for now"
   },
   "devDependencies": {
-    "@builder.io/qwik": "1.19.1",
+    "@builder.io/qwik": "1.19.2",
     "@eslint/js": "^10.0.1",
     "@types/eslint": "^9.6.1",
-    "@types/node": "^25.3.5",
-    "eslint": "10.0.3",
-    "eslint-plugin-qwik": "^1.19.1",
+    "@types/node": "^25.5.0",
+    "eslint": "10.1.0",
+    "eslint-plugin-qwik": "^1.19.2",
     "globals": "^17.4.0",
-    "lucide": "^0.577.0",
+    "lucide": "^1.7.0",
     "np": "^11.0.2",
     "typescript": "5.9.3",
-    "typescript-eslint": "^8.56.1",
-    "undici": "7.22.0",
+    "typescript-eslint": "^8.58.0",
+    "undici": "7.24.6",
     "vite": "7.3.1",
     "yargs": "^18.0.0"
   }
