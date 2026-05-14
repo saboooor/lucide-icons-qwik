@@ -16,6 +16,7 @@
     "incremental": true,
     "isolatedModules": true,
     "types": ["vite/client"],
+    "rootDir": "src/",
   },
   "include": ["src"],
   "exclude": ["build.ts"]
