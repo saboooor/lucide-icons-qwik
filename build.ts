@@ -1,116 +1,88 @@
 import { mkdir, writeFile } from 'fs/promises';
-import { readFileSync } from 'fs';
-import { icons as lucideIcons, IconNode } from 'lucide';
+import { createWriteStream, readFileSync } from 'fs';
 
-// -----------------------------
-// 1. Detect deprecated icons
-// -----------------------------
+import { IconNode, icons as lucideIcons } from 'lucide';
+
+// read lucide.d.ts to find deprecated icons
 const types = readFileSync('./node_modules/lucide/dist/lucide.d.ts', 'utf8');
 const deprecatedIcons = new Set<string>();
 const regex = /@deprecated[\s\S]*?declare const (\w+)/g;
-
 let match;
-while ((match = regex.exec(types))) {
-  deprecatedIcons.add(match[1]);
-}
+while ((match = regex.exec(types))) deprecatedIcons.add(match[1]);
 
-// -----------------------------
-// 2. Normalize icons
-// -----------------------------
-const icons: Record<string, IconNode> = {};
+const globalProps = [
+  'Infinity',
+];
 
-for (const [name, icon] of Object.entries(lucideIcons)) {
-  if (icons[name]) continue;
-  icons[name] = icon;
+// remove duplicate icons and fix some icon names to avoid shadowing of global properties
+const icons = Object.keys(lucideIcons).reduce((acc: Record<string, IconNode>, name) => {
+  const icon = lucideIcons[name as keyof typeof lucideIcons];
+  const duplicate = Object.values(acc).find(i => JSON.stringify(i) === JSON.stringify(icon));
+  if (!duplicate) acc[name] = icon;
 
-  // avoid global collisions
-  if (name === 'Infinity') {
-    icons['InfinityIcon'] = icon;
-    delete icons['Infinity'];
+  if (globalProps.includes(name)) {
+    const newName = `${name}Icon`;
+    acc[newName] = icon;
+    delete acc[name];
   }
-}
 
-// -----------------------------
-// 3. SVG builder
-// -----------------------------
+  return acc;
+}, {});
+
 function buildContent(icon: IconNode) {
-  return icon
-    .map(([tag, attrs]) => {
-      const props = Object.entries(attrs)
-        .map(([k, v]) => `${k}="${v}"`)
-        .join(' ');
-      return `<${tag} ${props} />`;
-    })
-    .join('');
-}
+  const elements = icon.map(t => {
+    const tag = t[0];
+    const attrs = Object.entries(t[1]).map(v => `${v[0]}="${v[1]}"`).join(' ');
+    return `<${tag} ${attrs}/>`;
+  });
 
-// -----------------------------
-// 4. Qwik icon template
-// -----------------------------
-function buildIconTemplate(name: string, content: string) {
-  const deprecated = deprecatedIcons.has(name)
-    ? `/**
- * @deprecated
+  return `${elements.join('')}`;
+};
+
+function buildIcon() {
+  const baseIconPath = '../base-icon';
+  const template = readFileSync('./icon.tsx.template', 'utf8')
+    .replace('{{BASE_ICON_REL_PATH}}', baseIconPath);
+
+  return function(name: string, content: string) {
+    // add deprecation comment if the icon is deprecated in lucide
+    const deprecated = deprecatedIcons.has(name)
+      ? `/**
+ * @deprecated Brand icons are deprecated in Lucide.
+ * Use https://simpleicons.org instead.
  */`
-    : '';
+      : '';
+    
+    return template
+      .replace('{{DOCS}}', deprecated)
+      .replace(/{{ICON_NAME}}/g, name)
+      .replace('{{CONTENT}}', content);
+  };
+};
 
-  return `
-${deprecated}
-import { component$ } from '@builder.io/qwik';
-import { BaseIcon } from '../base-icon';
-
-export const ${name} = component$(() => {
-  return (
-    <BaseIcon>
-      ${content}
-    </BaseIcon>
-  );
-});
-`;
+function buildExportLine(name: string, iconsRelPath: string) {
+  return `export { default as ${name} } from '${iconsRelPath}${name}';\n`;
 }
 
-// -----------------------------
-// 5. Build icons (Qwik files)
-// -----------------------------
-async function buildIcons() {
-  const outDir = './lib/icons';
-  await mkdir(outDir, { recursive: true });
-
-  await Promise.all(
-    Object.entries(icons).map(([name, icon]) => {
-      const content = buildContent(icon);
-      return writeFile(
-        `${outDir}/${name}.qwik.mjs`,
-        buildIconTemplate(name, content),
-        'utf8'
-      );
-    })
-  );
-}
-
-// -----------------------------
-// 6. Build PURE ESM barrel (IMPORTANT)
-// -----------------------------
-async function buildBarrel() {
-  const lines: string[] = [];
-
-  lines.push('// AUTO-GENERATED FILE - DO NOT EDIT\n');
-
-  for (const name of Object.keys(icons)) {
-    lines.push(
-      `export { ${name} } from './icons/${name}.qwik.mjs';`
-    );
-  }
-
-  await writeFile('./lib/index.mjs', lines.join('\n'), 'utf8');
-}
-
-// -----------------------------
-// 7. Run build
-// -----------------------------
 async function build() {
-  await buildIcons();
-  await buildBarrel();
+  // build icons
+  const iconsPath = './src/components/icons/';
+  const build = buildIcon();
+
+  await mkdir(iconsPath, { recursive: true });
+  await Promise.all(Object.keys(icons).map(name => {
+    const icon = icons[name];
+
+    return writeFile(`${iconsPath}${name}.tsx`, build(name, buildContent(icon)), 'utf8');
+  }));
+
+  // export icons
+  const baseIconPath = './components/base-icon';
+  const indexFile = createWriteStream('./src/index.ts', 'utf8');
+  indexFile.write('// This file is auto-generated by build.ts\n');
+  indexFile.write(`export * from '${baseIconPath}';\n\n`);
+  Object.keys(icons).forEach(k => indexFile.write(buildExportLine(k, './components/icons/')));
+  indexFile.close();
 }
 
 build();
