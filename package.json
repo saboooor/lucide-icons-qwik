@@ -1,6 +1,10 @@
 {
   "name": "lucide-icons-qwik",
   "version": "1.7.0-0",
+  "homepage": "https://github.com/saboooor/lucide-icons-qwik",
+  "bugs": {
+    "url": "https://github.com/saboooor/lucide-icons-qwik/issues"
+  },
   "description": "Lucide icon library package for Qwik applications",
   "author": {
     "name": "Luminescent",
