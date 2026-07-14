@@ -2,6 +2,10 @@
   "name": "lucide-icons-qwik",
   "version": "1.24.0-qwik-v2",
   "description": "Lucide icon library package for Qwik applications",
+  "homepage": "https://github.com/saboooor/lucide-icons-qwik",
+  "bugs": {
+    "url": "https://github.com/saboooor/lucide-icons-qwik/issues"
+  },
   "author": {
     "name": "saboooor",
     "url": "https://saboor.ca"
