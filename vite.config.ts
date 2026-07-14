@@ -1,7 +1,8 @@
 import { qwikVite } from "@qwik.dev/core/optimizer";
 import { qwikRouter } from "@qwik.dev/router/vite";
-import { defineConfig, type UserConfig } from "vite";
+import { defineConfig, type UserConfig, lazyPlugins } from "vite-plus";
 import pkg from "./package.json";
+import { lint, fmt } from "./vite.lint";
 
 const { dependencies = {}, peerDependencies = {} } = pkg as any;
 const makeRegex = (dep: string) => new RegExp(`^${dep}(/.*)?$`);
@@ -9,6 +10,10 @@ const excludeAll = (obj: Record<string, unknown>) => Object.keys(obj).map(makeRe
 
 export default defineConfig((): UserConfig => {
   return {
+    staged: {
+      "*": "vp check --fix"
+    },
+    lint, fmt,
     resolve: {
       tsconfigPaths: true,
     },
@@ -35,6 +40,6 @@ export default defineConfig((): UserConfig => {
         ],
       },
     },
-    plugins: [qwikVite(), qwikRouter()],
-  };
+    plugins: lazyPlugins(() => [qwikVite(), qwikRouter()]),
+  }
 });
