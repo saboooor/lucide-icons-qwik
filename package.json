@@ -65,7 +65,7 @@
   "devDependencies": {
     "@qwik.dev/core": "https://pkg.pr.new/QwikDev/qwik/@qwik.dev/core@8785",
     "@qwik.dev/router": "https://pkg.pr.new/QwikDev/qwik/@qwik.dev/router@8785",
-    "@types/node": "^26.1.1",
+    "@types/bun": "*",
     "globals": "^17.7.0",
     "lucide": "^1.25.0",
     "np": "^12.0.0",
