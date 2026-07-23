@@ -16,9 +16,10 @@
 
 <div align="center">
 
-  [![npm](https://img.shields.io/npm/v/lucide-icons-qwik?color=blue)](https://www.npmjs.com/package/lucide-icons-qwik)
-  ![NPM Downloads](https://img.shields.io/npm/dw/lucide-icons-qwik)
-  [![GitHub](https://img.shields.io/github/license/lucide-icons/lucide)](https://lucide.dev/license)
+[![npm](https://img.shields.io/npm/v/lucide-icons-qwik?color=blue)](https://www.npmjs.com/package/lucide-icons-qwik)
+![NPM Downloads](https://img.shields.io/npm/dw/lucide-icons-qwik)
+[![GitHub](https://img.shields.io/github/license/lucide-icons/lucide)](https://lucide.dev/license)
+
 </div>
 
 <p align="center">
@@ -58,7 +59,7 @@ bun add lucide-icons-qwik
 You can import the icon(s) you need as usual:
 
 ```ts
-import { ThumbsUp } from "lucide-icons-qwik";
+import { ThumbsUp } from 'lucide-icons-qwik';
 ```
 
 or import them all at once:
@@ -80,11 +81,11 @@ Lucide `Icon` component have these optional `props`:
 
 ```ts
 export interface IconProps extends QwikDOMAttributes {
-  size?: number,            // default: 24
-  color?: string,           // default: "currentColor"
-  strokeWidth?: number,     // default: 2
-  strokeLinecap?: "round" | "butt" | "square" | "inherit" | undefined,   // default: "round"
-  strokeLinejoin?: "round" | "inherit" | "miter" | "bevel" | undefined   // default: "round"
+  size?: number; // default: 24
+  color?: string; // default: "currentColor"
+  strokeWidth?: number; // default: 2
+  strokeLinecap?: 'round' | 'butt' | 'square' | 'inherit' | undefined; // default: "round"
+  strokeLinejoin?: 'round' | 'inherit' | 'miter' | 'bevel' | undefined; // default: "round"
 }
 ```
 
@@ -98,4 +99,4 @@ Join the [Luminescent Discord server](https://discord.gg/sf5Hty88TR) for support
 ## License
 
 Lucide is licensed under the ISC license. See [LICENSE](https://lucide.dev/license).
-This library is licensed under [MIT License](https://github.com/LuminescentDev/lucide-icons-qwik/blob/main/LICENSE "https://github.com/LuminescentDev/lucide-icons-qwik/blob/main/LICENSE").
+This library is licensed under [MIT License](https://github.com/LuminescentDev/lucide-icons-qwik/blob/main/LICENSE 'https://github.com/LuminescentDev/lucide-icons-qwik/blob/main/LICENSE').
