@@ -37,7 +37,7 @@
     "yarn": "please-use-pnpm",
     "pnpm": ">=8.6.12"
   },
-  "packageManager": "pnpm@10.33.0",
+  "packageManager": "pnpm@12.16.1",
   "private": false,
   "type": "module",
   "scripts": {
@@ -56,16 +56,16 @@
     "@builder.io/qwik": "1.19.2",
     "@eslint/js": "^10.0.1",
     "@types/eslint": "^9.6.1",
-    "@types/node": "^25.5.0",
+    "@types/node": "^26.0.0",
     "eslint": "10.1.0",
     "eslint-plugin-qwik": "^1.19.2",
     "globals": "^17.4.0",
     "lucide": "^1.7.0",
-    "np": "^11.0.2",
-    "typescript": "5.9.3",
+    "np": "^12.0.0",
+    "typescript": "7.0.2",
     "typescript-eslint": "^8.58.0",
-    "undici": "7.24.6",
-    "vite": "7.3.1",
+    "undici": "8.12.3",
+    "vite": "8.3.5",
     "yargs": "^18.0.0"
   }
 }
